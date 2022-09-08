@@ -18,6 +18,10 @@ void get_edits(const char *p_row, const char *q_row,
     assert(p && q && edits); // Don't want to handle allocation failures
 
     // FIXME: do the actual calculations here
+    memset(p, 0, n+1); 
+    memset(q, 0, n+1);
+    memset(edits, 0, n+1);
+
     int j = 0; // for the p variable
     int k = 0; // for the q variable
    for (int i = 0 ; i < n ; i ++) {
@@ -31,21 +35,20 @@ void get_edits(const char *p_row, const char *q_row,
             q[k] = q_row[i];
             k++; 
         }
-        else if (p_row[i] ==q_row[i]) {
+        else {
             edits[i] = 'M';
             p[j] = p_row[i];
             q[k] = q_row[i];
             j++;
             k++;
-        } 
+        }
     }
-    printf("%s", "accaaagta \n");
     printf("%s", p);
     printf("%c", '\n');
-    printf("%s", "acaaatgtcca \n");
     printf("%s", q);
     printf("%c", '\n');
     printf("%s", edits);
+    printf("%c", '\n');
 
    /* p[0] = '\0';     // for now we just make
     q[0] = '\0';     // empty strings
