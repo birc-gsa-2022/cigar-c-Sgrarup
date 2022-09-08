@@ -18,10 +18,38 @@ void get_edits(const char *p_row, const char *q_row,
     assert(p && q && edits); // Don't want to handle allocation failures
 
     // FIXME: do the actual calculations here
+    int j = 0; // for the p variable
+    int k = 0; // for the q variable
+   for (int i = 0 ; i < n ; i ++) {
+        if (p_row[i] != '-' && q_row[i] == '-') {
+            edits[i] = 'D';
+            p[j] = p_row[i]; 
+            j++;
+        }
+        else if (p_row[i] == '-' && q_row[i] != '-') {
+            edits[i] = 'I';
+            q[k] = q_row[i];
+            k++; 
+        }
+        else if (p_row[i] ==q_row[i]) {
+            edits[i] = 'M';
+            p[j] = p_row[i];
+            q[k] = q_row[i];
+            j++;
+            k++;
+        } 
+    }
+    printf("%s", "accaaagta \n");
+    printf("%s", p);
+    printf("%c", '\n');
+    printf("%s", "acaaatgtcca \n");
+    printf("%s", q);
+    printf("%c", '\n');
+    printf("%s", edits);
 
-    p[0] = '\0';     // for now we just make
+   /* p[0] = '\0';     // for now we just make
     q[0] = '\0';     // empty strings
-    edits[0] = '\0'; // so at least we can run tests.
+    edits[0] = '\0'; // so at least we can run tests. */
 }
 
 int edit_dist(const char *p, const char *x, int i, const char *edits)
