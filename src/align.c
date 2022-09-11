@@ -12,6 +12,7 @@ void local_align(const char *p, const char *x, int i, const char *edits,
     assert(*p_row && *x_row); // Don't want to handle allocation failures
 
     // Compute the alignment rows
+    
 }
 
 void align(const char *p, const char *q, const char *edits,

@@ -43,12 +43,6 @@ void get_edits(const char *p_row, const char *q_row,
             k++;
         }
     }
-    printf("%s", p);
-    printf("%c", '\n');
-    printf("%s", q);
-    printf("%c", '\n');
-    printf("%s", edits);
-    printf("%c", '\n');
 
    /* p[0] = '\0';     // for now we just make
     q[0] = '\0';     // empty strings
@@ -58,6 +52,7 @@ void get_edits(const char *p_row, const char *q_row,
 int edit_dist(const char *p, const char *x, int i, const char *edits)
 {
     int dist = 0;
+    
     // Compute the edit distance
     return dist;
 }
