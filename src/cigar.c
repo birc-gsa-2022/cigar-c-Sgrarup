@@ -13,7 +13,14 @@ void edits_to_cigar(const char *edits, char **cigar)
 
 static inline int count_edits(const char *cigar)
 {
-    return 42; // Work out how long the string will be
+    int n = strlen(cigar);
+    int len = 0;
+    for (int i = 0 ; i < n ; i++ ) {
+        if (i % 2 == 0 ) {
+            len += atoi(&cigar[i]);
+        }
+    }
+    return len; // Work out how long the string will be
 }
 
 void cigar_to_edits(const char *cigar, char **edits)
@@ -22,4 +29,22 @@ void cigar_to_edits(const char *cigar, char **edits)
     *edits = malloc(no_edits + 1);
 
     // construct the edits sequence
+
+    int n = strlen(cigar);
+    int im_len = 0;
+
+    memset(*edits, 0, no_edits+1);
+
+    for (int i = 0 ; i < n ; i++) {
+        if (i % 2 == 0 ) {
+            im_len = atoi(&cigar[i]);
+        }
+        else {
+            char *c = cigar[i]; 
+            for (int j = 0 ; j < im_len ; j++) {
+               strcat(*edits, &c);
+            } 
+        } 
+    } 
+
 }

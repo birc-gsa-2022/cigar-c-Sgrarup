@@ -41,6 +41,7 @@ void align(const char *p, const char *q, const char *edits,
             strncat(*q_row, "-", 1);
         } 
     }
-    p_row[n] = '\0';
-    q_row[n] = '\0';
+
+    
+    // fprintf("%s\n", *q_row);
 }
