@@ -28,24 +28,24 @@ void align(const char *p, const char *q, const char *edits,
     memset(*p_row, 0, n+1);
     memset(*q_row, 0, n+1);
 
-    int p_num = 0;
-    int q_num = 0;
+    int j = 0;
+    int k = 0;
     for (int i = 0; i <= n ; i++) {
         if (edits[i] == 'M') {
-            strncat(*p_row, &p[p_num], 1); 
-            strncat(*q_row, &q[q_num], 1); 
-            p_num++;
-            q_num++;
+            strncat(*p_row, &p[j], 1); 
+            strncat(*q_row, &q[k], 1); 
+            j++;
+            k++;
         }
         else if (edits[i] == 'I') {
             strncat(*p_row, "-", 1);
-            strncat(*q_row, &q[q_num], 1);
-            q_num++;
+            strncat(*q_row, &q[k], 1);
+            k++;
         }
         else if (edits[i] == 'D') {
-            strncat(*p_row, &p[p_num], 1);
+            strncat(*p_row, &p[j], 1);
             strncat(*q_row, "-", 1);
-            p_num++;
+            j++;
         } 
     }
 }

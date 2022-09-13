@@ -25,12 +25,12 @@ void get_edits(const char *p_row, const char *q_row,
     int j = 0; // for the p variable
     int k = 0; // for the q variable
    for (int i = 0 ; i < n ; i ++) {
-        if (p_row[i] != '-' && q_row[i] == '-') {
+        if (q_row[i] == '-') {
             edits[i] = 'D';
             p[j] = p_row[i]; 
             j++;
         }
-        else if (p_row[i] == '-' && q_row[i] != '-') {
+        else if (p_row[i] == '-') {
             edits[i] = 'I';
             q[k] = q_row[i];
             k++; 
@@ -52,7 +52,7 @@ void get_edits(const char *p_row, const char *q_row,
 int edit_dist(const char *p, const char *x, int i, const char *edits)
 {
     int dist = 0;
-    
+
     // Compute the edit distance
     return dist;
 }
