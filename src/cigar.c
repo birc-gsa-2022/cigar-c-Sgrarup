@@ -8,7 +8,26 @@ void edits_to_cigar(const char *edits, char **cigar)
 {
     size_t n = strlen(edits);
     *cigar = malloc(2 * n + 1); // maximal length for a cigar
+
+
     // Compute the CIGAR string
+    memset(*cigar, 0,2*n+1);
+
+    char cur = edits[0];
+    int no = 1;
+
+    for (int i = 1 ; i <= n ; i++) {
+        if (edits[i] == cur) {
+            no++;
+        }
+        else {
+            char *num = no + '0';
+            strncat(*cigar, &num, 1);
+            strncat(*cigar, &cur, 1);
+            cur = edits[i];
+            no = 1;
+        }
+    }
 }
 
 static inline int count_edits(const char *cigar)
@@ -40,9 +59,9 @@ void cigar_to_edits(const char *cigar, char **edits)
             im_len = atoi(&cigar[i]);
         }
         else {
-            char *c = cigar[i]; 
+            char c = cigar[i]; 
             for (int j = 0 ; j < im_len ; j++) {
-               strcat(*edits, &c);
+               strncat(*edits, &c, 1);
             } 
         } 
     } 
