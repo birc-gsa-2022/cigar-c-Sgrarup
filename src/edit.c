@@ -22,25 +22,19 @@ void get_edits(const char *p_row, const char *q_row,
     memset(q, 0, n+1);
     memset(edits, 0, n+1);
 
-    int j = 0; // for the p variable
-    int k = 0; // for the q variable
    for (int i = 0 ; i < n ; i ++) {
         if (q_row[i] == '-') {
-            edits[i] = 'D';
-            p[j] = p_row[i]; 
-            j++;
+            *(edits++) = 'D';
+            *(p++) = p_row[i]; 
         }
         else if (p_row[i] == '-') {
-            edits[i] = 'I';
-            q[k] = q_row[i];
-            k++; 
+            *(edits++) = 'I';
+            *(q++) = q_row[i];
         }
         else {
-            edits[i] = 'M';
-            p[j] = p_row[i];
-            q[k] = q_row[i];
-            j++;
-            k++;
+            *(edits++) = 'M';
+            *(p++) = p_row[i]; 
+            *(q++) = q_row[i];
         }
     }
 

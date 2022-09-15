@@ -25,6 +25,8 @@ void align(const char *p, const char *q, const char *edits,
     *q_row = malloc(n + 1);
 
     // Compute the alignment rows
+    char *pbuf = *p_row, *qbuf = *q_row;
+
     memset(*p_row, 0, n+1);
     memset(*q_row, 0, n+1);
 
@@ -32,20 +34,16 @@ void align(const char *p, const char *q, const char *edits,
     int k = 0;
     for (int i = 0; i <= n ; i++) {
         if (edits[i] == 'M') {
-            strncat(*p_row, &p[j], 1); 
-            strncat(*q_row, &q[k], 1); 
-            j++;
-            k++;
+            *(pbuf++) = p[j++];
+            *(qbuf++) = q[k++];
         }
         else if (edits[i] == 'I') {
-            strncat(*p_row, "-", 1);
-            strncat(*q_row, &q[k], 1);
-            k++;
+            *(pbuf++) = '-';
+            *(qbuf++) = q[k++];
         }
         else if (edits[i] == 'D') {
-            strncat(*p_row, &p[j], 1);
-            strncat(*q_row, "-", 1);
-            j++;
+            *(pbuf++) = p[j++];
+            *(qbuf++) = '-';
         } 
     }
 }

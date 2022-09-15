@@ -48,7 +48,6 @@ void cigar_to_edits(const char *cigar, char **edits)
     *edits = malloc(no_edits + 1);
 
     // construct the edits sequence
-
     int n = strlen(cigar);
     int im_len = 0;
 
@@ -61,7 +60,8 @@ void cigar_to_edits(const char *cigar, char **edits)
         else {
             char c = cigar[i]; 
             for (int j = 0 ; j < im_len ; j++) {
-               strncat(*edits, &c, 1);
+              **edits++ = c;
+              // strncat(*edits, &c, 1);
             } 
         } 
     } 
