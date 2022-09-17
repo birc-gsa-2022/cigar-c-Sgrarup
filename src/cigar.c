@@ -33,11 +33,19 @@ void edits_to_cigar(const char *edits, char **cigar)
 static inline int count_edits(const char *cigar)
 {
     int n = strlen(cigar);
+    int cum = 0;
     int len = 0;
     for (int i = 0 ; i < n ; i++ ) {
-        if (i % 2 == 0 ) {
-            len += atoi(&cigar[i]);
+        if (cigar[i] == '0') {
+            if (atoi(&cigar[i]) != 0 ) {
+                len += atoi(&cigar[i]);
+                if (atoi(&cigar[i-1]) != 0 ) {
+                    len += atoi(&cigar[i-1])*9;
+                }
+            }
+            else continue;
         }
+        else continue;
     }
     return len; // Work out how long the string will be
 }
@@ -54,14 +62,17 @@ void cigar_to_edits(const char *cigar, char **edits)
     memset(*edits, 0, no_edits+1);
 
     for (int i = 0 ; i < n ; i++) {
-        if (i % 2 == 0 ) {
+        if (cigar[i] == '0' || atoi(&cigar[i]) != 0) {
             im_len = atoi(&cigar[i]);
+            if (atoi(&cigar[i-1]) != 0 ) {
+                im_len += atoi(&cigar[i-1])*9;
+            }
+            else continue;
         }
         else {
             char c = cigar[i]; 
             for (int j = 0 ; j < im_len ; j++) {
-              **edits++ = c;
-              // strncat(*edits, &c, 1);
+              *(edits++) = &c;
             } 
         } 
     } 
