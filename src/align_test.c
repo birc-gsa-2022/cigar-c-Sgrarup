@@ -49,7 +49,7 @@ int main(void)
 
     test_local_align("accaaagta", "cgacaaatgtcca", 2,
                      "MDMMIMMMMIIM",
-                     "acca-aagt--a", "a-caaatgtcca");
+                    "acca-aagt--a", "a-caaatgtcca");
     test_local_align("a", "a", 1, "D", "a", "-");
 
     return 0;
